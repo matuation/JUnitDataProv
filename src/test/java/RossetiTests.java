@@ -23,7 +23,6 @@ public class RossetiTests {
 
     @BeforeEach
     void setUp() {
-
         open(baseUrl);
     }
 
@@ -33,7 +32,6 @@ public class RossetiTests {
     @ParameterizedTest(name = "Для поискового запроса {0} должен отдавать не пустой результат")
     @Tag("BLOCKER")
     void searchResultsShouldNotBeEmpty(String searchQuery) {
-        open(baseUrl);
         $("#header-search-show").click();
         $("#title-search-input").setValue(searchQuery).pressEnter();
         $$(".search-result-item")
@@ -47,7 +45,6 @@ public class RossetiTests {
     @ParameterizedTest(name = "Для поиска по {0} в заголовке должна быть ссылка {1}")
     @Tag("BLOCKER")
     void searchResultsShouldHaveUrlTitle(String searchQuery, String expectedText) {
-        open(baseUrl);
         $("#header-search-show").click();
         $("#title-search-input").setValue(searchQuery).pressEnter();
         $(".result-title").shouldHave(text(expectedText));

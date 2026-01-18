@@ -27,7 +27,6 @@ public class HabrTests {
 
     @BeforeEach
     void setUp() {
-
         open(baseUrl);
     }
 
@@ -35,27 +34,20 @@ public class HabrTests {
     @ParameterizedTest(name = "При выборе языка {0} должен менятся заголовок")
     @Tag("BLOCKER")
     void languageShouldSwitchCorrectly(Language language) {
-        open(baseUrl);
         $(".tm-header-user-menu__toggle").click();
         $$(".tm-input-radio-labeled").find(text(language.name())).click();
-        $(".tm-page-settings-form__title")
-                .shouldHave(text(language.description));
+        $(".tm-page-settings-form__title").shouldHave(text(language.description));
     }
 
     static Stream<Arguments> whenLanguageSwitchedHeadersShouldSwitch() {
-        return Stream.of(
-                Arguments.of(Language.Русский, List.of("Интерфейс", "Публикации", "Вид ленты", "Цветовая тема")),
-                Arguments.of(Language.English, List.of("Interface", "Content", "Feed", "View options"))
-        );
+        return Stream.of(Arguments.of(Language.Русский, List.of("Интерфейс", "Публикации", "Вид ленты", "Цветовая тема")), Arguments.of(Language.English, List.of("Interface", "Content", "Feed", "View options")));
     }
 
     @MethodSource
     @ParameterizedTest(name = "При смене языка {0} должны смениться заголовки")
     void whenLanguageSwitchedHeadersShouldSwitch(Language language, List<String> expectedHeaders) {
-        open(baseUrl);
         $(".tm-header-user-menu__toggle").click();
         $$(".tm-input-radio-labeled").find(text(language.name())).click();
-        $$(".tm-fieldset__header")
-                .shouldHave(texts(expectedHeaders));
+        $$(".tm-fieldset__header").shouldHave(texts(expectedHeaders));
     }
 }
