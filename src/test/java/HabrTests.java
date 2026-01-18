@@ -15,20 +15,7 @@ import static com.codeborne.selenide.Condition.text;
 import static com.codeborne.selenide.Configuration.baseUrl;
 import static com.codeborne.selenide.Selenide.*;
 
-public class HabrTests {
-    @BeforeAll
-    static void beforeAll() {
-        //Configuration.browserSize = "1920x1080";
-        baseUrl = "https://habr.com/ru/feed/";
-        Configuration.pageLoadStrategy = "eager";
-        //Configuration.holdBrowserOpen = true;
-        //Configuration.timeout = 5000; // default 4000
-    }
-
-    @BeforeEach
-    void setUp() {
-        open(baseUrl);
-    }
+public class HabrTests extends TestBaseHabr{
 
     @EnumSource(Language.class)
     @ParameterizedTest(name = "При выборе языка {0} должен менятся заголовок")
